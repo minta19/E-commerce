@@ -87,7 +87,6 @@
                 <p>Email: {{ user.email }}</p>
                 <div class="navigation">
                     <a href="{% url 'prolist' %}">Back to Products</a>
-                    
                 </div>
                 <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
@@ -101,8 +100,16 @@
                 <h2>Your Cart:</h2>
                 <ul>
                     {% for cart_item in cart_items %}
-                         <li>{{ cart_item.product.P_name }} : {{ cart_item.quantity }}</li>
-                         <li><img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.P_name }}" width="200" height="200"></li>
+                        <li>
+                            {{ cart_item.product.P_name }} : {{ cart_item.quantity }}
+                            <form action="{% url 'cart_del' cart_item.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit">Remove from cart</button>
+                            </form>
+                        </li><br>
+                        <li>
+                            <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.P_name }}" width="200" height="200">
+                        </li>
                         <li>
                             <form action="{% url 'or_der' %}" method="POST">
                                 {% csrf_token %}
@@ -112,7 +119,7 @@
                     {% endfor %}
                 </ul>
                 {% else %}
-                     <p>Your cart is empty.</p>
+                    <p>Your cart is empty.</p>
                 {% endif %}
             </div>
         </div>

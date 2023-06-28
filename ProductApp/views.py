@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views.generic import ListView
 from .models import Product,Cart,CartItem,Order,OrderItem
 from django.contrib.auth import authenticate,login,logout
@@ -111,3 +111,11 @@ def order_success(request,total_price):
         'total_price':total_price
     }
     return render(request, 'ProductApp/order_success.html',context)
+
+@login_required
+def cart_delete(request,cart_item_id):
+    cart_item=get_object_or_404(CartItem,id=cart_item_id)
+    if cart_item.cart.user != request.user:
+        return redirect('profile')
+    cart_item.delete()
+    return redirect('profile')
