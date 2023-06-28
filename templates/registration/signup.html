@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGNUP</title>
+    <style>
+        body {
+            background-color: #dae1f5;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color: #a4ceec;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <center><h1>SIGNUP</h1></center>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <center><button type="submit">Signup</button> </center> 
+    </div>
+
+</body>
+</html>

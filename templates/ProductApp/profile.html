@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFILE</title>
+    <style>
+    
+    body {
+        background-color:#c2fae8;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #c2fae8;
+    }
+    .left-container {
+        flex: 1;
+        padding-right: 20px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background-color: #7cd8c1;
+    }
+
+    .right-container {
+        flex: 1;
+        flex-direction: column;
+        padding-left: 30px;
+        margin-left: auto;
+        background-color: #c2fae8;
+    }
+
+    .profile {
+        margin-bottom: 30px;
+    }
+
+    .cart {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap; 
+        padding: 0;
+    }
+    .cart ul{
+        width: 50%;
+        list-style: none;
+    }
+
+    .cart img {
+        width: 70%;
+        height: auto;
+        display: block;
+        margin-bottom: 20px;
+    }
+    
+    .navigation {
+        margin-top: 30px;
+    }
+
+    .navigation a {
+        display: block;
+        margin-bottom: 10px;
+        text-decoration: none;
+        color: #141111;
+    }
+
+    .navigation a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-container">
+            <div class="profile">
+                <center><h1>User Profile</h1></center>
+                <p>Username: {{ user.username }}</p>
+                <p>First Name: {{ user.first_name }}</p>
+                <p>Last Name: {{ user.last_name }}</p>
+                <p>Email: {{ user.email }}</p>
+                <div class="navigation">
+                    <a href="{% url 'prolist' %}">Back to Products</a>
+                    
+                </div>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="cart">
+                {% if cart_items %}
+                <h2>Your Cart:</h2>
+                <ul>
+                    {% for cart_item in cart_items %}
+                         <li>{{ cart_item.product.P_name }} : {{ cart_item.quantity }}</li>
+                         <li><img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.P_name }}" width="200" height="200"></li>
+                        <li>
+                            <form action="{% url 'or_der' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit">PLACE ORDER</button>
+                            </form>
+                        </li><br>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                     <p>Your cart is empty.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

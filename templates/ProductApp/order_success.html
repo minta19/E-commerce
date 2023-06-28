@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDER SUCCESS</title>
+    <style>
+        body {
+        background-color:#c2fae8;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        h1 {
+            color: rgb(106, 0, 255);
+            font-weight: bold;
+        }
+        a {
+            color: rgb(9, 9, 14);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ORDER SUCCESSFULLY PLACED</h1>
+        <br>
+        <a href="{% url 'HOME' %}">HOME PAGE</a><br>
+        <a href="{% url 'profile' %}">BACK TO PROFILE</a>
+    </div>
+</body>
+</html>

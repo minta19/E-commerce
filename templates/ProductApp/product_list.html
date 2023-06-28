@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <style>
+        body {
+        background-color: #fbf1f4; 
+    }
+    .link-list {
+        list-style: none;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px;
+    }
+    .link-list li img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+    .link-list li {
+        margin: 0 10px;
+    }
+
+    .link-list li h3 {
+            color: #656330;
+        }
+
+        .link-list li p {
+            color: #777;
+        }
+    
+    </style>
+</head>
+<body>
+    <center><h1 style="color: rgb(137, 94, 9);">Products Available</h1></center>
+    <ul class="link-list">
+        {% for product in product_view %}
+            <li>
+                <img src="{{ product.image.url }}" alt="{{ product.P_name }}" width="400" height="400">
+                <h3>{{ product.P_name }}</h3>
+                <p>Price: {{ product.Price }}</p>
+                <p>Quantity: {{ product.Quantity }}</p><br>
+                {% if product.Quantity > 0%}
+                    <form method="POST" action="{% url 'add_cart' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                {% else %}
+                    <p>OUT OF STOCK </p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No products available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

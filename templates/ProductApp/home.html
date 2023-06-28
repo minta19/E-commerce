@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    {% load static %}
+    <style>
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5e4d6fd;
+            background-image: url('{% static "pictures/tyler.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        .left-container {
+            flex: 1;
+            padding: 0px;
+            max-width: 300px; 
+            height: 300px;
+            margin-right: 100px;
+            background-color: #589ec7;
+        }
+
+        .right-container {
+            flex: 1;
+            padding: 10px;
+            max-width: 700px;
+            margin-left: 20px; 
+            background-color: #e6f1fa;
+        }
+
+        .navigation {
+            background-color: #c5e1f1;
+            padding: 40px;
+        }
+
+        .navigation a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-family: 'Arial arrow';
+            margin-bottom: 40px;
+        }
+
+        
+        .image-container {
+            width: 400px;
+            height: 400px;
+            background-image: url('{% static "pictures/tyler.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <a href="{% url 'login' %}" style="color: rgb(9, 9, 14);">LOGIN</a>
+        <a href="{% url 'signup' %}" style="color: rgb(9, 9, 14);">SIGNUP</a>
+        <a href="{% url 'prolist' %}" style="color: rgb(9, 9, 14);">PRODUCTS</a>
+    </div>
+    <div class="container">
+        <div class="left-container">
+            <div class="image-container"></div>
+        </div>
+        <div class="right-container">
+            <h1 class="welcome-message">Welcome!<br> OCEANCLOUD E-STORE</h1>
+
+        </div>
+    </div>
+</body>
+</html>
