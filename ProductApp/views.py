@@ -95,7 +95,6 @@ def order_view(request):
             product.save()
             OrderItem.objects.create(order=order, product=product, quantity=quantity_to_buy)
     
-        # OrderItem.objects.create(order=order, product=cart_item.product, quantity=cart_item.quantity)
     
     cart.cartitem_set.all().delete()
     order=Order.objects.create(user=user,total_price=total_price)
