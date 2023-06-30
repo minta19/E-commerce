@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .actions {
+            display: flex;
+        }
+
+        .actions a {
+            margin-right: 10px;
+        }
+
+        .update-form input[type="number"] {
+            width: 60px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.P_name }}</td>
+                    <td>{{ product.Price }}</td>
+                    <td><img src="{{ product.image.url }}" alt="{{ product.P_name }}" width="100"></td>
+                    <td>
+                        <div class="update-form">
+                            <form method="post" action="{% url 'custom_admin:edit_product_quantity' product.id %}">
+                                {% csrf_token %}
+                                <input type="number" name="quantity" value="{{ product.Quantity }}">
+                                <button type="submit">Update</button>
+                            </form>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <!-- <a href="{% url 'custom_admin:edit_product_quantity' product.id %}">Edit</a> -->
+                        <a href="{% url 'custom_admin:delete_product' product.id %}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
